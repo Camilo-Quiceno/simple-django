@@ -7,5 +7,10 @@
 </head>
 <body>
     <h1>We are in the page Manage Courses</h1>
+    <ul>
+        {% for c in courses %}
+        <li> {{c.name}} </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
