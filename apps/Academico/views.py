@@ -14,4 +14,8 @@ def registerCourse(request):
     
     new_course = Course.objects.create(code=code, name=name, credits=credits)
     return redirect('/', RequestContext(request))
-    
+
+def deleteCourse(request, code):
+    course = Course.objects.get(code=code)
+    course.delete()
+    return redirect('/', RequestContext(request))
