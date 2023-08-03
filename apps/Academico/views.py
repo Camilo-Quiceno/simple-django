@@ -12,7 +12,22 @@ def registerCourse(request):
     name = request.POST['txtName']
     credits = request.POST['numCredits']
     
-    new_course = Course.objects.create(code=code, name=name, credits=credits)
+    Course.objects.create(code=code, name=name, credits=credits)
+    return redirect('/', RequestContext(request))
+
+def editCourse(request, code):
+    course = Course.objects.get(code=code)
+    return render(request, "editCourse.html", {"course": course})
+
+def courseEdited(request):
+    code = request.POST['txtCode']
+    name = request.POST['txtName']
+    credits = request.POST['numCredits']
+    
+    course = Course.objects.get(code=code)
+    course.name = name
+    course.credits = credits
+    course.save()
     return redirect('/', RequestContext(request))
 
 def deleteCourse(request, code):
